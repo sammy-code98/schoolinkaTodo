@@ -2,6 +2,9 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    container: {
+      center: true,
+    },
     screens: {
       sm: "640px",
       md: "768px",
@@ -13,8 +16,10 @@ export default {
       colors: {
         base_white: "#FFFFFF",
         primary_grey: "#344054",
+        secondary_grey: "#EAECF0",
         primary_black: "#101828",
         primary_blue: "#3F5BF6",
+        grey: "#475467",
       },
       fontFamily: {
         sans: ["Work Sans", "sans-serif"],
