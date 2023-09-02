@@ -1,4 +1,4 @@
-import { Header } from "./components"
+import { Header, DateSlider } from "./components"
 import { MdAdd } from "react-icons/md";
 
 
@@ -20,6 +20,15 @@ function App() {
             </button>
           </div>
         </div>
+
+        <div className="mt-12 grid grid-cols-3 gap-4">
+
+          <div className="col-span-2 p-4 border-r-secondary_grey">
+            <DateSlider />
+          </div>
+          <div>lee</div>
+        </div>
+
       </div>
     </>
   )

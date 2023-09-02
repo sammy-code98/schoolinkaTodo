@@ -1,3 +1,4 @@
 import Header from "./Header";
+import DateSlider from "./DateSlider";
 
-export { Header };
+export { Header, DateSlider };

@@ -20,6 +20,7 @@ export default {
         primary_black: "#101828",
         primary_blue: "#3F5BF6",
         grey: "#475467",
+        date_grey: "#D0D5DD",
       },
       fontFamily: {
         sans: ["Work Sans", "sans-serif"],
