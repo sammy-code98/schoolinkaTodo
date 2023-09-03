@@ -3,6 +3,16 @@ import { MdAdd } from "react-icons/md";
 
 
 function App() {
+  let timeOfDay: string;
+  const date: Date = new Date()
+  const hours: number = date.getHours()
+  if (hours < 12) {
+    timeOfDay = 'morning'
+  } else if (hours >= 12 && hours < 17) {
+    timeOfDay = 'afternoon'
+  } else {
+    timeOfDay = 'night'
+  }
 
   return (
     <>
@@ -10,7 +20,7 @@ function App() {
       <div className="relative mx-auto max-w-screen-xl mt-12">
         <div className="flex justify-between">
           <div className="px-4 lg:px-0">
-            <h3 className="text-primary_black text-3xl font-normal">Good morning!</h3>
+            <h3 className="text-primary_black text-3xl font-semibold">Good {timeOfDay}!</h3>
             <p className="mt-2 text-grey">You got some task to do. </p>
           </div>
           <div className="hidden lg:block">

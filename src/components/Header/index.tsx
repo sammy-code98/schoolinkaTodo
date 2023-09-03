@@ -6,10 +6,10 @@ export default function Index() {
     const [menuOpen, setMenuOpen] = useState<boolean>(false)
     const handleClick = () => setMenuOpen(!menuOpen)
     return (
-        <header>
-            <nav className="bg-base_white border-b border-secondary_grey px-4 lg:px-6 py-4 ">
+        <header className="sticky z-50 top-0 ">
+            <nav className="bg-base_white border-b border-secondary_grey px-4 lg:px-6 py-4">
 
-                <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+                <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl ">
                     <h3 className="text-2xl font-semibold">ToDo</h3>
                     <div className="hidden lg:flex flex-wrap justify-between items-center gap-x-4">
                         <MdOutlineSettings />
