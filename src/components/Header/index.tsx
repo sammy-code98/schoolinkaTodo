@@ -3,7 +3,7 @@ import { MdOutlineSettings, MdOutlineNotificationsNone, MdSegment, MdClear } fro
 
 
 export default function Index() {
-    const [menuOpen, setMenuOpen] = useState(false)
+    const [menuOpen, setMenuOpen] = useState<boolean>(false)
     const handleClick = () => setMenuOpen(!menuOpen)
     return (
         <header>

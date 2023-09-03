@@ -21,6 +21,7 @@ export default {
         primary_blue: "#3F5BF6",
         grey: "#475467",
         date_grey: "#D0D5DD",
+        card_white: "#F9FAFB",
       },
       fontFamily: {
         sans: ["Work Sans", "sans-serif"],
