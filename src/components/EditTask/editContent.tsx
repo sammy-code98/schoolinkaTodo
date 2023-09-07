@@ -1,12 +1,15 @@
 import { MdClear, MdAccessTime } from "react-icons/md";
 import { BsCalendar2Date } from "react-icons/bs";
 
-
-export default function EditContent() {
+interface EditProps {
+    contentHandler: () => void,
+    closeEditContent: () => void
+}
+export default function EditContent({ contentHandler, closeEditContent }: EditProps) {
     return (
         <div className='p-8 bg-base_white  rounded-lg border-task_border drop-shadow-xl mt-12'>
             <div className="flex justify-end" >
-                <MdClear size='1.5rem' color="#344054" className="cursor-pointer" />
+                <MdClear size='1.5rem' color="#344054" className="cursor-pointer" onClick={closeEditContent} />
             </div>
             <div className="mt-8">
                 <h3 className='text-primary_black text-lg font-semibold'>Create Wireframe</h3>
@@ -32,6 +35,7 @@ export default function EditContent() {
                 </button>
 
                 <button type="submit"
+                    onClick={contentHandler}
                     className="py-1.5 px-16 text-lg font-semibold text-base_white bg-primary_blue rounded-lg border border-primary_blue drop-shadow-sm hover:opacity-100">
                     Edit
                 </button>
