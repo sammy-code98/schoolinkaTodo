@@ -22,6 +22,7 @@ export default {
         grey: "#475467",
         date_grey: "#D0D5DD",
         card_white: "#F9FAFB",
+        task_border: "#F2F4F7",
       },
       fontFamily: {
         sans: ["Work Sans", "sans-serif"],
