@@ -7,7 +7,10 @@ import { addTaskSchema } from "../../utils";
 interface TaskInput {
     task: string
 }
-export default function AddTask() {
+interface ModalProps {
+    clickHandler: () => void
+}
+export default function AddTask({ clickHandler }: ModalProps) {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<TaskInput>({
         resolver: yupResolver(addTaskSchema)
@@ -19,14 +22,13 @@ export default function AddTask() {
         console.log(data);
         reset()
 
-
     }
     return (
         <div className='p-8 bg-base_white  rounded-lg border-task_border drop-shadow-xl mt-12'>
             <form onSubmit={handleSubmit(onSubmit)} >
             <div className='flex justify-between items-center'>
                 <h3 className='text-primary_black text-lg font-semibold'>Add Task</h3>
-                <MdClear size='1.5rem' color="#344054" className="cursor-pointer" />
+                    <MdClear size='1.5rem' color="#344054" className="cursor-pointer" onClick={clickHandler} />
             </div>
 
             <div className='mt-8'>
@@ -60,10 +62,11 @@ export default function AddTask() {
                 <MdClear size='1rem' color="#344054" className="cursor-pointer" />
             </div>
 
-
             <div className='mt-6 flex justify-between items-center'>
 
-                <button type='button' className='py-1.5 px-12  text-lg font-meduim text-primary_grey drop-shadow-sm bg-base_white rounded-lg border border-task_border hover:bg-primary_blue hover:text-base_white'>
+                    <button type='button'
+                        onClick={clickHandler}
+                        className='py-1.5 px-12  text-lg font-meduim text-primary_grey drop-shadow-sm bg-base_white rounded-lg border border-task_border hover:bg-primary_blue hover:text-base_white'>
                     Cancel
                 </button>
 
