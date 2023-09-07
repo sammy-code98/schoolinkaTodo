@@ -1,6 +1,9 @@
 import { useState } from "react";
-import { Header, DateSlider, TaskCard, AddTask } from "./components"
 import { MdAdd } from "react-icons/md";
+import { Header, DateSlider, TaskCard, AddTask } from "./components"
+import { EditContent, EditTask } from "./components/EditTask";
+
+
 
 
 function App() {
@@ -17,6 +20,13 @@ function App() {
 
   // state for create task modal
   const [showModal, setShowModal] = useState<boolean>(false)
+
+  // state to trigger edit modal
+
+  const [showEditModal, setShowEditModal] = useState<boolean>(false)
+
+  // state for edit modal
+  const [editModal, setEditModal] = useState<boolean>(false)
 
 
   return (
@@ -42,9 +52,9 @@ function App() {
             <DateSlider />
             <div className="mt-4">
               <h5 className="text-primary_black text-lg font-semibold">My Tasks</h5>
-              <TaskCard title={"Create Wireframe"} timestamp={"10:30 am - 11:30 am"} day={"Today"} />
-              <TaskCard title={"Create Wireframe"} timestamp={"10:30 am - 11:30 am"} day={"Today"} />
-              <TaskCard title={"Create Wireframe"} timestamp={"10:30 am - 11:30 am"} day={"Today"} />
+              <TaskCard title={"Create Wireframe"} timestamp={"10:30 am - 11:30 am"} day={"Today"} editHandler={() => setShowEditModal(true)} />
+              {/* <TaskCard title={"Create Wireframe"} timestamp={"10:30 am - 11:30 am"} day={"Today"} /> */}
+              {/* <TaskCard title={"Create Wireframe"} timestamp={"10:30 am - 11:30 am"} day={"Today"} /> */}
 
             </div>
           </div>
@@ -52,6 +62,18 @@ function App() {
             {showModal ? (
               <AddTask clickHandler={() => setShowModal(false)} />
             ) : null}
+
+            <div> 
+              {showEditModal ? (
+                <EditContent closeEditContent={() => setShowEditModal(false)} contentHandler={() => setEditModal(true)} />
+              ) : null}
+            </div>
+
+            <div>
+              {editModal ? (
+                <EditTask editHandler={() => setEditModal(false)} />
+              ) : null}
+            </div>
           </div>
         </div>
 
