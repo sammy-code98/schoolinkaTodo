@@ -1,19 +1,39 @@
 import { MdClear, MdAccessTime, MdNotifications } from "react-icons/md";
 import { BsCalendar2Date } from "react-icons/bs";
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { addTaskSchema } from "../../utils";
 
-
-
+interface TaskInput {
+    task: string
+}
 export default function AddTask() {
+
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<TaskInput>({
+        resolver: yupResolver(addTaskSchema)
+    })
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const onSubmit = (data: TaskInput, e: any) => {
+        e.preventDefault()
+        console.log(data);
+        reset()
+
+
+    }
     return (
         <div className='p-8 bg-base_white  rounded-lg border-task_border drop-shadow-xl mt-12'>
-
+            <form onSubmit={handleSubmit(onSubmit)} >
             <div className='flex justify-between items-center'>
                 <h3 className='text-primary_black text-lg font-semibold'>Add Task</h3>
                 <MdClear size='1.5rem' color="#344054" className="cursor-pointer" />
             </div>
 
             <div className='mt-8'>
-                <textarea rows={4} className='w-full p-2.5 text-primary_grey rounded-lg bg-base_white border border-task_border drop-shadow-sm focus:ring-task_border focus:border-task_border' placeholder='Enter your Task'></textarea>
+                    <textarea
+                        {...register('task')}
+                        rows={4} className='w-full p-2.5 text-primary_grey rounded-lg bg-base_white border border-task_border drop-shadow-sm focus:ring-task_border focus:border-task_border' placeholder='Enter your Task'></textarea>
+                    <p className="mt-2 text-red-500">{errors.task?.message}</p>
             </div>
 
             <div className='mt-4 flex justify-between items-center'>
@@ -47,11 +67,12 @@ export default function AddTask() {
                     Cancel
                 </button>
 
-                <button type="button"
+                    <button type="submit"
                     className="py-1.5 px-16 text-lg font-meduim text-base_white bg-primary_blue rounded-lg border border-primary_blue drop-shadow-sm hover:opacity-100">
                     Add
                 </button>
             </div>
+            </form>
 
         </div>
     )
