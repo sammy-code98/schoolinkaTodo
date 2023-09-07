@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Header, DateSlider, TaskCard } from "./components"
+import { AddTask } from "./components/TaskModals";
 import { MdAdd } from "react-icons/md";
 
 
@@ -14,6 +16,10 @@ function App() {
     timeOfDay = 'night'
   }
 
+  // state for create task modal
+  const [showModal, setShowModal] = useState<boolean>(false)
+
+
   return (
     <>
       <Header />
@@ -25,7 +31,8 @@ function App() {
           </div>
           <div className="hidden lg:block">
             <button type="button"
-              className="flex items-center gap-2 py-2 px-6 text-base_white bg-primary_blue rounded-lg border border-primary_blue drop-shadow-[0px_1px_2px_0px_rgba(16, 24, 40, 0.05)]">
+              onClick={() => setShowModal(true)}
+              className="flex items-center gap-2 py-2 px-6 text-base_white bg-primary_blue rounded-lg border border-primary_blue drop-shadow-md">
               <MdAdd /> Create New Task
             </button>
           </div>
@@ -42,7 +49,11 @@ function App() {
 
             </div>
           </div>
-          <div className="hidden lg:block">lee</div>
+          <div className="hidden lg:block">
+            {showModal ? (
+              <AddTask clickHandler={() => setShowModal(false)} />
+            ) : null}
+          </div>
         </div>
 
 
