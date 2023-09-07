@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Header, DateSlider, TaskCard, AddTask } from "./components"
 import { MdAdd } from "react-icons/md";
+import { EditContent } from "./components/EditTask";
+
 
 
 function App() {
@@ -52,6 +54,10 @@ function App() {
             {showModal ? (
               <AddTask clickHandler={() => setShowModal(false)} />
             ) : null}
+
+            <div>
+              <EditContent />
+            </div>
           </div>
         </div>
 

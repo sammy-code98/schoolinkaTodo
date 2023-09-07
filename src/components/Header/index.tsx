@@ -12,8 +12,8 @@ export default function Index() {
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl ">
                     <h3 className="text-2xl font-semibold">ToDo</h3>
                     <div className="hidden lg:flex flex-wrap justify-between items-center gap-x-4">
-                        <MdOutlineSettings />
-                        <MdOutlineNotificationsNone />
+                        <MdOutlineSettings size="1.5rem" />
+                        <MdOutlineNotificationsNone size="1.5rem" />
                         <img className="w-10 h-10 rounded-full" src="https://bit.ly/sage-adebayo" alt="Rounded avatar" />
 
                     </div>
