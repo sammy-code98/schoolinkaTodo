@@ -66,12 +66,12 @@ export default function AddTask({ clickHandler }: ModalProps) {
 
                     <button type='button'
                         onClick={clickHandler}
-                        className='py-1.5 px-12  text-lg font-meduim text-primary_grey drop-shadow-sm bg-base_white rounded-lg border border-task_border hover:bg-primary_blue hover:text-base_white'>
+                        className='py-1.5 px-12  text-lg font-semibold text-primary_grey drop-shadow-sm bg-base_white rounded-lg border border-task_border hover:bg-primary_blue hover:text-base_white'>
                     Cancel
                 </button>
 
                     <button type="submit"
-                    className="py-1.5 px-16 text-lg font-meduim text-base_white bg-primary_blue rounded-lg border border-primary_blue drop-shadow-sm hover:opacity-100">
+                        className="py-1.5 px-16 text-lg font-semibold text-base_white bg-primary_blue rounded-lg border border-primary_blue drop-shadow-sm hover:opacity-100">
                     Add
                 </button>
             </div>
