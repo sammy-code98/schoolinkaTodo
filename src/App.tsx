@@ -2,8 +2,8 @@ import { useState } from "react";
 import { MdAdd } from "react-icons/md";
 import { Header, DateSlider, TaskCard, AddTask } from "./components"
 import { EditContent, EditTask } from "./components/EditTask";
-
-
+import { useQuery } from "react-query";
+import { getTodos } from "./api/todos";
 function App() {
 
   let timeOfDay: string;
@@ -33,9 +33,13 @@ function App() {
     setModal((prev) => {
       return { ...prev, ...newModals }
     })
-    console.log({ modal })
 
   }
+
+  const { isLoading, isError, data } = useQuery('todo', getTodos)
+  if (isLoading) return "Loading..."
+  if (isError) return "An error has occured "
+
 
   return (
     <>
@@ -61,7 +65,10 @@ function App() {
 
             <div className="mt-4">
               <h5 className="text-primary_black text-lg font-semibold">My Tasks</h5>
-              <TaskCard title={"Create Wireframe"} timestamp={"10:30 am - 11:30 am"} day={"Today"} editHandler={() => handleOpenModal("editContnet")} />
+              {data && data.length > 0 && data.map((todo: { title: string; }) => {
+                return <TaskCard key={todo.title} title={todo.title} timestamp={"10:30 am - 11:30 am"} day={"Today"} editHandler={() => handleOpenModal("editContnet")} />
+
+              })}
             </div>
           </div>
           <div className="hidden lg:block">
