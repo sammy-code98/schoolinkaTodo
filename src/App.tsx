@@ -4,9 +4,8 @@ import { Header, DateSlider, TaskCard, AddTask } from "./components"
 import { EditContent, EditTask } from "./components/EditTask";
 
 
-
-
 function App() {
+
   let timeOfDay: string;
   const date: Date = new Date()
   const hours: number = date.getHours()
@@ -18,16 +17,25 @@ function App() {
     timeOfDay = 'night'
   }
 
-  // state for create task modal
-  const [showModal, setShowModal] = useState<boolean>(false)
+  // initialise modalObj
+  const modalObjInit = {
+    addTask: false,
+    editContnet: false,
+    editTask: false
+  }
+  // modal state
+  const [modal, setModal] = useState<{ addTask: boolean, editContnet: boolean, editTask: boolean }>(modalObjInit)
 
-  // state to trigger edit modal
+  // function to handle open modals
+  const handleOpenModal = (type: "addTask" | "editContnet" | "editTask") => {
+    const newModals = { ...modalObjInit, [type]: !modal[type] }
+    console.log({ newModals })
+    setModal((prev) => {
+      return { ...prev, ...newModals }
+    })
+    console.log({ modal })
 
-  const [showEditModal, setShowEditModal] = useState<boolean>(false)
-
-  // state for edit modal
-  const [editModal, setEditModal] = useState<boolean>(false)
-
+  }
 
   return (
     <>
@@ -40,7 +48,7 @@ function App() {
           </div>
           <div className="hidden lg:block">
             <button type="button"
-              onClick={() => setShowModal(true)}
+              onClick={() => handleOpenModal("addTask")}
               className="flex items-center gap-2 py-2 px-6 font-semibold text-base_white bg-primary_blue rounded-lg border border-primary_blue drop-shadow-md">
               <MdAdd /> Create New Task
             </button>
@@ -50,28 +58,26 @@ function App() {
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-4">
           <div className="col-span-2 p-4 border-r-secondary_grey">
             <DateSlider />
+
             <div className="mt-4">
               <h5 className="text-primary_black text-lg font-semibold">My Tasks</h5>
-              <TaskCard title={"Create Wireframe"} timestamp={"10:30 am - 11:30 am"} day={"Today"} editHandler={() => setShowEditModal(true)} />
-              {/* <TaskCard title={"Create Wireframe"} timestamp={"10:30 am - 11:30 am"} day={"Today"} /> */}
-              {/* <TaskCard title={"Create Wireframe"} timestamp={"10:30 am - 11:30 am"} day={"Today"} /> */}
-
+              <TaskCard title={"Create Wireframe"} timestamp={"10:30 am - 11:30 am"} day={"Today"} editHandler={() => handleOpenModal("editContnet")} />
             </div>
           </div>
           <div className="hidden lg:block">
-            {showModal ? (
-              <AddTask clickHandler={() => setShowModal(false)} />
+            {modal.addTask ? (
+              <AddTask clickHandler={() => handleOpenModal("addTask")} />
             ) : null}
 
             <div> 
-              {showEditModal ? (
-                <EditContent closeEditContent={() => setShowEditModal(false)} contentHandler={() => setEditModal(true)} />
+              {modal.editContnet ? (
+                <EditContent closeEditContent={() => handleOpenModal("editContnet")} contentHandler={() => handleOpenModal("editTask")} />
               ) : null}
             </div>
 
             <div>
-              {editModal ? (
-                <EditTask editHandler={() => setEditModal(false)} />
+              {modal.editTask ? (
+                <EditTask editHandler={() => handleOpenModal("editTask")} />
               ) : null}
             </div>
           </div>

@@ -2,7 +2,7 @@ import { MdClear, MdAccessTime, MdNotifications } from "react-icons/md";
 import { BsCalendar2Date } from "react-icons/bs";
 
 interface EditModalProps {
-    editHandler: () => void
+    editHandler: () => void,
 }
 export default function EditTask({ editHandler }: EditModalProps) {
     return (
