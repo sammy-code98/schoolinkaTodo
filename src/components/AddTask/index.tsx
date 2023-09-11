@@ -3,6 +3,11 @@ import { BsCalendar2Date } from "react-icons/bs";
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { addTaskSchema } from "../../utils";
+import { useMutation, useQueryClient } from "react-query";
+import { postTodo } from "../../api/todos";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 interface TaskInput {
     task: string
@@ -15,12 +20,55 @@ export default function AddTask({ clickHandler }: ModalProps) {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<TaskInput>({
         resolver: yupResolver(addTaskSchema)
     })
+    const queryClient = useQueryClient()
+    const { mutate, isLoading } = useMutation(postTodo, {
+        onSuccess: data => {
+            console.log(data);
+            const message = "Task Added Successfully"
+            toast.success(message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            })
+
+        },
+        onError: () => {
+            toast.error('An error occured', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            })
+        },
+        onSettled: () => {
+            queryClient.invalidateQueries('create')
+            // clickHandler()
+
+        }
+
+    })
+
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onSubmit = (data: TaskInput, e: any) => {
         e.preventDefault()
+        const todos = {
+            ...data
+        }
+        mutate(todos)
         console.log(data);
         reset()
+        // clickHandler()
+
 
     }
     return (
@@ -72,11 +120,12 @@ export default function AddTask({ clickHandler }: ModalProps) {
 
                     <button type="submit"
                         className="py-1.5 px-16 text-lg font-semibold text-base_white bg-primary_blue rounded-lg border border-primary_blue drop-shadow-sm hover:opacity-100">
-                    Add
+                        {isLoading ? 'Adding...' : 'Add'}
                 </button>
             </div>
             </form>
 
+            <ToastContainer />
         </div>
     )
 }
