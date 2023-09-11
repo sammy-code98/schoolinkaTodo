@@ -24,7 +24,7 @@ export default function AddTask({ clickHandler }: ModalProps) {
     const { mutate, isLoading } = useMutation(postTodo, {
         onSuccess: data => {
             console.log(data);
-            const message = "Success"
+            const message = "Task Added Successfully"
             toast.success(message, {
                 position: "top-right",
                 autoClose: 5000,
@@ -51,6 +51,8 @@ export default function AddTask({ clickHandler }: ModalProps) {
         },
         onSettled: () => {
             queryClient.invalidateQueries('create')
+            // clickHandler()
+
         }
 
     })
@@ -65,6 +67,8 @@ export default function AddTask({ clickHandler }: ModalProps) {
         mutate(todos)
         console.log(data);
         reset()
+        // clickHandler()
+
 
     }
     return (
