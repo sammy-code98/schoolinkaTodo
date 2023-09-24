@@ -4,6 +4,8 @@ import { Header, DateSlider, TaskCard, AddTask } from "./components"
 import { EditContent, EditTask } from "./components/EditTask";
 import { useQuery } from "react-query";
 import { getTodos } from "./api/todos";
+import { Toaster } from 'react-hot-toast';
+
 function App() {
 
   let timeOfDay: string;
@@ -89,9 +91,11 @@ function App() {
             </div>
           </div>
         </div>
-
-
       </div>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+      />
     </>
   )
 }
