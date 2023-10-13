@@ -5,6 +5,8 @@ import { EditContent, EditTask } from "./components/EditTask";
 import { useQuery } from "react-query";
 import { getTodos } from "./api/todos";
 import { Toaster } from 'react-hot-toast';
+import { BallTriangle } from 'react-loader-spinner'
+
 
 function App() {
 
@@ -40,7 +42,7 @@ function App() {
 
   }
 
-  const { isLoading, isError, error, data } = useQuery(['todo', pageNumber], () => getTodos(pageNumber), { keepPreviousData: true })
+  const { isLoading, isFetching, isError, error, data } = useQuery(['todo', pageNumber], () => getTodos(pageNumber), { keepPreviousData: true })
 
 
   return (
@@ -68,7 +70,14 @@ function App() {
             <div className="mt-4">
               <h5 className="text-primary_black text-lg font-semibold">My Tasks</h5>
               <div >
-                {isLoading ? (<div>Loading...</div>) : isError ? (<div className="flex items-center">Error:{error.message}</div>) : (<div>
+                {isLoading || isFetching ? (<div className="flex items-center justify-center">
+                  <BallTriangle height={100}
+                    width={100}
+                    radius={5}
+                    visible={true}
+                    color="#3F5BF6"
+                    ariaLabel="ball-triangle-loading" />
+                </div>) : isError ? (<div className="flex items-center">Error:{error.message}</div>) : (<div>
                   {data && data.length > 0 && data.map((todo: { title: string; }) => {
                     return <TaskCard
                       key={todo.title} title={todo.title}
