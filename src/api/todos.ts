@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const getTodos = async () => {
+export const getTodos = async (pageNumber: number) => {
   const { data } = await axios.get(
-    "https://jsonplaceholder.typicode.com/todos"
+    `https://jsonplaceholder.typicode.com/todos?_limit=5&_page=${pageNumber}`
   );
   return data;
 };
