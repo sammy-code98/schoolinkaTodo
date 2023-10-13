@@ -5,9 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { addTaskSchema } from "../../utils";
 import { useMutation, useQueryClient } from "react-query";
 import { postTodo } from "../../api/todos";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import toast from 'react-hot-toast';
 
 interface TaskInput {
     task: string
@@ -23,35 +21,17 @@ export default function AddTask({ clickHandler }: ModalProps) {
     const queryClient = useQueryClient()
     const { mutate, isLoading } = useMutation(postTodo, {
         onSuccess: data => {
-            console.log(data);
+            console.log(data, 'oppp');
             const message = "Task Added Successfully"
-            toast.success(message, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            })
+            toast.success(message)
 
         },
         onError: () => {
-            toast.error('An error occured', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            })
+            toast.error('An error occured')
         },
         onSettled: () => {
             queryClient.invalidateQueries('create')
-            // clickHandler()
+            clickHandler()
 
         }
 
@@ -65,10 +45,8 @@ export default function AddTask({ clickHandler }: ModalProps) {
             ...data
         }
         mutate(todos)
-        console.log(data);
+        console.log(data, 'loloeo');
         reset()
-        // clickHandler()
-
 
     }
     return (
@@ -125,7 +103,6 @@ export default function AddTask({ clickHandler }: ModalProps) {
             </div>
             </form>
 
-            <ToastContainer />
         </div>
     )
 }
